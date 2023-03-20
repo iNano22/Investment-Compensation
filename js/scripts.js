@@ -63,3 +63,51 @@ window.addEventListener('DOMContentLoaded', event => {
 
 });
 
+gapi.load('client', initClient);
+
+function initClient() {
+  gapi.client.init({
+    apiKey: 'AIzaSyDpszOKF0byDf_OQJeNCMNq8cgzMijqNsA',
+    discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+  }).then(function () {
+    // Authorization successful, continue with the rest of your code here
+  }, function (error) {
+    console.error(error);
+  });
+}
+
+function onSubmit(event) {
+    event.preventDefault();
+    
+    // Get form values
+    const firstName = document.getElementById('first-name').value;
+    const lastName = document.getElementById('last-name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const scamBroker = document.getElementById('scam-broker').value;
+    const selectAmount = document.getElementById('select-amount').value;
+  
+    // Append row to Google Sheets
+    const values = [[firstName, lastName, email, phone, scamBroker, selectAmount]];
+    const range = 'Sheet1!A1:F1'; // Replace Sheet1 with the name of your sheet
+    const body = { values };
+    gapi.client.sheets.spreadsheets.values.append({
+      spreadsheetId: '1LYO9HO9-625qiAQxd2aeFztPupT6vzDGdNV5EJNRQao',
+      range: range,
+      valueInputOption: 'USER_ENTERED',
+      resource: body
+    }).then((response) => {
+      console.log(`${response.result.updates.updatedCells} cells appended.`);
+    }, (reason) => {
+      console.error(`Error: ${reason.result.error.message}`);
+    });
+  
+    // Clear form inputs
+    document.getElementById('first-name').value = '';
+    document.getElementById('last-name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('phone').value = '';
+    document.getElementById('scam-broker').value = '';
+    document.getElementById('select-amount').value = '';
+  }
+  
