@@ -11469,7 +11469,7 @@ header.masthead .masthead-heading {
   width: 2px;
   margin-left: -1.5px;
   content: "";
-  background-color: #e9ecef;
+  background-color: #E5E4E2;
 }
 .timeline > li {
   position: relative;
@@ -11511,7 +11511,7 @@ header.masthead .masthead-heading {
   margin-left: 0;
   text-align: center;
   color: white;
-  border: 7px solid #e9ecef;
+  border: 7px solid #E5E4E2;
   border-radius: 100%;
   background-color: #ffc800;
 }
@@ -11797,7 +11797,14 @@ select option[disabled]:first-child {
     font-size: 1em;
   }
 
-  section {
-    margin-top: 40px;
-  }
+}
+
+.card {
+  border-radius: .7rem;
+}
+
+hr {
+  border: none;
+    height: 1px;
+    background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
 }
